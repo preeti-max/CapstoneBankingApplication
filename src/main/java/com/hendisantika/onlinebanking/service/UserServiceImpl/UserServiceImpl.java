@@ -1,8 +1,8 @@
 package com.hendisantika.onlinebanking.service.UserServiceImpl;
 
-import com.hendisantika.onlinebanking.entity.User;
-import com.hendisantika.onlinebanking.repository.RoleDao;
-import com.hendisantika.onlinebanking.repository.UserDao;
+import com.hendisantika.onlinebanking.dao.RoleDao;
+import com.hendisantika.onlinebanking.dao.UserDao;
+import com.hendisantika.onlinebanking.model.User;
 import com.hendisantika.onlinebanking.security.UserRole;
 import com.hendisantika.onlinebanking.service.AccountService;
 import com.hendisantika.onlinebanking.service.UserService;
@@ -16,16 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 10/08/18
- * Time: 06.23
- * To change this template use File | Settings | File Templates.
- */
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -55,7 +45,6 @@ public class UserServiceImpl implements UserService {
     public User findByEmail(String email) {
         return userDao.findByEmail(email);
     }
-
 
     public User createUser(User user, Set<UserRole> userRoles) {
         User localUser = userDao.findByUsername(user.getUsername());

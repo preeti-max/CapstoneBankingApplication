@@ -1,6 +1,6 @@
 package com.hendisantika.onlinebanking.controller;
 
-import com.hendisantika.onlinebanking.entity.User;
+import com.hendisantika.onlinebanking.model.User;
 import com.hendisantika.onlinebanking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,16 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 04/09/18
- * Time: 06.38
- * To change this template use File | Settings | File Templates.
- */
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -53,6 +43,5 @@ public class UserController {
 
         return "profile";
     }
-
 
 }

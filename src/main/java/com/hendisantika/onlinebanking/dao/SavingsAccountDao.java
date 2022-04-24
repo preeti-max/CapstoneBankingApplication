@@ -1,6 +1,6 @@
-package com.hendisantika.onlinebanking.repository;
+package com.hendisantika.onlinebanking.dao;
 
-import com.hendisantika.onlinebanking.entity.SavingsAccount;
+import com.hendisantika.onlinebanking.model.SavingsAccount;
 import org.springframework.data.repository.CrudRepository;
 
 /**

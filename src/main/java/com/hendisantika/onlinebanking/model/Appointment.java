@@ -1,4 +1,4 @@
-package com.hendisantika.onlinebanking.entity;
+package com.hendisantika.onlinebanking.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,16 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.util.Date;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 07/08/18
- * Time: 06.46
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 public class Appointment {
 

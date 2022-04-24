@@ -12,18 +12,21 @@
 
 <body>
 <!-- Login Section -->
-<img class="img-responsive" src="/images/banner.png" alt="banner"/>
+
 <div class="container">
+    
     <div class="row ">
         <div class="main-center ">
             <div class="bg-danger" th:if="${param.error}">
-                Invalid username and secret.
+                Invalid username and password.  Enter correct credentials.
             </div>
             <div class="bg-danger" th:if="${param.logout}">
                 You have been logged out.
             </div>
+            
             <form class="form-signin" th:action="@{/index}" method="post">
-                <h2 class="form-signin-heading">Please sign in</h2>
+                <h1 id="bankName2">INDIAN COLLABORATIVE BANK</h1>
+                <h2 class="form-signin-heading">PLEASE SIGN IN</h2>
                 <div class="form-group">
                     <label for="username" class="sr-only">Username</label>
                     <input type="text" roleId="username" class="form-control" placeholder="Username" name="username"

@@ -1,16 +1,16 @@
 package com.hendisantika.onlinebanking.service.UserServiceImpl;
 
-import com.hendisantika.onlinebanking.entity.PrimaryAccount;
-import com.hendisantika.onlinebanking.entity.PrimaryTransaction;
-import com.hendisantika.onlinebanking.entity.Recipient;
-import com.hendisantika.onlinebanking.entity.SavingsAccount;
-import com.hendisantika.onlinebanking.entity.SavingsTransaction;
-import com.hendisantika.onlinebanking.entity.User;
-import com.hendisantika.onlinebanking.repository.PrimaryAccountDao;
-import com.hendisantika.onlinebanking.repository.PrimaryTransactionDao;
-import com.hendisantika.onlinebanking.repository.RecipientDao;
-import com.hendisantika.onlinebanking.repository.SavingsAccountDao;
-import com.hendisantika.onlinebanking.repository.SavingsTransactionDao;
+import com.hendisantika.onlinebanking.dao.PrimaryAccountDao;
+import com.hendisantika.onlinebanking.dao.PrimaryTransactionDao;
+import com.hendisantika.onlinebanking.dao.RecipientDao;
+import com.hendisantika.onlinebanking.dao.SavingsAccountDao;
+import com.hendisantika.onlinebanking.dao.SavingsTransactionDao;
+import com.hendisantika.onlinebanking.model.PrimaryAccount;
+import com.hendisantika.onlinebanking.model.PrimaryTransaction;
+import com.hendisantika.onlinebanking.model.Recipient;
+import com.hendisantika.onlinebanking.model.SavingsAccount;
+import com.hendisantika.onlinebanking.model.SavingsTransaction;
+import com.hendisantika.onlinebanking.model.User;
 import com.hendisantika.onlinebanking.service.TransactionService;
 import com.hendisantika.onlinebanking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +22,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 10/08/18
- * Time: 06.21
- * To change this template use File | Settings | File Templates.
- */
 @Service
 public class TransactionServiceImpl implements TransactionService {
 
@@ -52,7 +42,6 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
     private RecipientDao recipientDao;
-
 
     public List<PrimaryTransaction> findPrimaryTransactionList(String username) {
         User user = userService.findByUsername(username);
@@ -84,7 +73,8 @@ public class TransactionServiceImpl implements TransactionService {
         savingsTransactionDao.save(savingsTransaction);
     }
 
-    public void betweenAccountsTransfer(String transferFrom, String transferTo, String amount, PrimaryAccount primaryAccount, SavingsAccount savingsAccount) throws Exception {
+    public void betweenAccountsTransfer(String transferFrom, String transferTo, String amount,
+            PrimaryAccount primaryAccount, SavingsAccount savingsAccount) throws Exception {
         if (transferFrom.equalsIgnoreCase("Primary") && transferTo.equalsIgnoreCase("Savings")) {
             primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
             savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().add(new BigDecimal(amount)));
@@ -93,7 +83,9 @@ public class TransactionServiceImpl implements TransactionService {
 
             Date date = new Date();
 
-            PrimaryTransaction primaryTransaction = new PrimaryTransaction(date, "Between account transfer from " + transferFrom + " to " + transferTo, "Account", "Finished", Double.parseDouble(amount), primaryAccount.getAccountBalance(), primaryAccount);
+            PrimaryTransaction primaryTransaction = new PrimaryTransaction(date,
+                    "Between account transfer from " + transferFrom + " to " + transferTo, "Account", "Finished",
+                    Double.parseDouble(amount), primaryAccount.getAccountBalance(), primaryAccount);
             primaryTransactionDao.save(primaryTransaction);
         } else if (transferFrom.equalsIgnoreCase("Savings") && transferTo.equalsIgnoreCase("Primary")) {
             primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().add(new BigDecimal(amount)));
@@ -103,7 +95,9 @@ public class TransactionServiceImpl implements TransactionService {
 
             Date date = new Date();
 
-            SavingsTransaction savingsTransaction = new SavingsTransaction(date, "Between account transfer from " + transferFrom + " to " + transferTo, "Transfer", "Finished", Double.parseDouble(amount), savingsAccount.getAccountBalance(), savingsAccount);
+            SavingsTransaction savingsTransaction = new SavingsTransaction(date,
+                    "Between account transfer from " + transferFrom + " to " + transferTo, "Transfer", "Finished",
+                    Double.parseDouble(amount), savingsAccount.getAccountBalance(), savingsAccount);
             savingsTransactionDao.save(savingsTransaction);
         } else {
             throw new Exception("Invalid Transfer");
@@ -131,14 +125,17 @@ public class TransactionServiceImpl implements TransactionService {
         recipientDao.deleteByName(recipientName);
     }
 
-    public void toSomeoneElseTransfer(Recipient recipient, String accountType, String amount, PrimaryAccount primaryAccount, SavingsAccount savingsAccount) {
+    public void toSomeoneElseTransfer(Recipient recipient, String accountType, String amount,
+            PrimaryAccount primaryAccount, SavingsAccount savingsAccount) {
         if (accountType.equalsIgnoreCase("Primary")) {
             primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
             primaryAccountDao.save(primaryAccount);
 
             Date date = new Date();
 
-            PrimaryTransaction primaryTransaction = new PrimaryTransaction(date, "Transfer to recipient " + recipient.getName(), "Transfer", "Finished", Double.parseDouble(amount), primaryAccount.getAccountBalance(), primaryAccount);
+            PrimaryTransaction primaryTransaction = new PrimaryTransaction(date,
+                    "Transfer to recipient " + recipient.getName(), "Transfer", "Finished", Double.parseDouble(amount),
+                    primaryAccount.getAccountBalance(), primaryAccount);
             primaryTransactionDao.save(primaryTransaction);
         } else if (accountType.equalsIgnoreCase("Savings")) {
             savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().subtract(new BigDecimal(amount)));
@@ -146,7 +143,9 @@ public class TransactionServiceImpl implements TransactionService {
 
             Date date = new Date();
 
-            SavingsTransaction savingsTransaction = new SavingsTransaction(date, "Transfer to recipient " + recipient.getName(), "Transfer", "Finished", Double.parseDouble(amount), savingsAccount.getAccountBalance(), savingsAccount);
+            SavingsTransaction savingsTransaction = new SavingsTransaction(date,
+                    "Transfer to recipient " + recipient.getName(), "Transfer", "Finished", Double.parseDouble(amount),
+                    savingsAccount.getAccountBalance(), savingsAccount);
             savingsTransactionDao.save(savingsTransaction);
         }
     }

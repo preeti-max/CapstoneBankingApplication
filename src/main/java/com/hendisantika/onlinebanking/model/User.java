@@ -1,4 +1,4 @@
-package com.hendisantika.onlinebanking.entity;
+package com.hendisantika.onlinebanking.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hendisantika.onlinebanking.security.Authority;
@@ -20,16 +20,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 07/08/18
- * Time: 06.47
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 public class User implements UserDetails {
 
@@ -210,6 +200,5 @@ public class User implements UserDetails {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
 
 }

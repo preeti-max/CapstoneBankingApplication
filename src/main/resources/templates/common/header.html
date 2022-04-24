@@ -32,7 +32,7 @@
 <body>
 <!-- Navigation -->
 <div th:fragment="navbar">
-    <img alt="banner" class="img-responsive" src="/images/banner2.png"/>
+    
 
     <nav class="navbar navbar-default " role="navigation">
         <div class="container">
@@ -47,7 +47,7 @@
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse  navbar-collapse navbar-ex1-collapse">
+            <div class="collapse  navbar-collapse navbar-ex1-collapse " >
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
@@ -57,7 +57,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Accounts <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a th:href="@{/account/primaryAccount}">Primary</a></li>
+                            <li><a th:href="@{/account/primaryAccount}">Current</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a th:href="@{/account/savingsAccount}">Savings</a></li>
                         </ul>
@@ -72,13 +72,7 @@
                             <li><a th:href="@{/transfer/recipient}">Add/Edit Recipient</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">Appointment <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/appointment/create}">Schedule an Appointment</a></li>
-                        </ul>
-                    </li>
+                    
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -96,7 +90,9 @@
         </div>
         <!-- /.container -->
     </nav>
+    <h1 id="bankName">INDIAN COLLABORATIVE BANK</h1>
 </div>
+
 
 <div th:fragment="body-bottom-scripts">
     <!-- jQuery -->

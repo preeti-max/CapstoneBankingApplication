@@ -1,6 +1,6 @@
-package com.hendisantika.onlinebanking.repository;
+package com.hendisantika.onlinebanking.dao;
 
-import com.hendisantika.onlinebanking.entity.Appointment;
+import com.hendisantika.onlinebanking.model.Appointment;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

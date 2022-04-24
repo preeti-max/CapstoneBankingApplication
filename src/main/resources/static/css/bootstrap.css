@@ -5118,10 +5118,13 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-
+#bankName{
+    color:blue;
+    align: center;
+}
 .navbar {
     position: relative;
-    min-height: 50px;
+    min-height: 65px;
     margin-bottom: 20px;
     border: 1px solid transparent;
 }
@@ -5511,12 +5514,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default {
-    background-color: #f8f8f8;
+    background-color: white;
     border-color: #e7e7e7;
 }
 
 .navbar-default .navbar-brand {
-    color: #777;
+    color: black;
 }
 
 .navbar-default .navbar-brand:hover,
@@ -7731,6 +7734,7 @@ button.close {
     display: inline-block;
     margin-top: -10px;
 }
+
 
 .carousel-control .icon-prev,
 .carousel-control .glyphicon-chevron-left {

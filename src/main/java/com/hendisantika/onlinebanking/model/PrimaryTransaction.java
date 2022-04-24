@@ -1,4 +1,4 @@
-package com.hendisantika.onlinebanking.entity;
+package com.hendisantika.onlinebanking.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,16 +9,6 @@ import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 07/08/18
- * Time: 06.49
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 public class PrimaryTransaction {
 
@@ -35,11 +25,11 @@ public class PrimaryTransaction {
     @JoinColumn(name = "primary_account_id")
     private PrimaryAccount primaryAccount;
 
-
     public PrimaryTransaction() {
     }
 
-    public PrimaryTransaction(Date date, String description, String type, String status, double amount, BigDecimal availableBalance, PrimaryAccount primaryAccount) {
+    public PrimaryTransaction(Date date, String description, String type, String status, double amount,
+            BigDecimal availableBalance, PrimaryAccount primaryAccount) {
         this.date = date;
         this.description = description;
         this.type = type;

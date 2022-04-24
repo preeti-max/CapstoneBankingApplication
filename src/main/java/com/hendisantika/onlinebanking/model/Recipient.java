@@ -1,4 +1,4 @@
-package com.hendisantika.onlinebanking.entity;
+package com.hendisantika.onlinebanking.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -9,16 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 07/08/18
- * Time: 06.54
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 public class Recipient {
 

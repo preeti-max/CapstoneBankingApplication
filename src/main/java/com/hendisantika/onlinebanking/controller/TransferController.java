@@ -1,11 +1,5 @@
 package com.hendisantika.onlinebanking.controller;
 
-import com.hendisantika.onlinebanking.entity.PrimaryAccount;
-import com.hendisantika.onlinebanking.entity.Recipient;
-import com.hendisantika.onlinebanking.entity.SavingsAccount;
-import com.hendisantika.onlinebanking.entity.User;
-import com.hendisantika.onlinebanking.service.TransactionService;
-import com.hendisantika.onlinebanking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,16 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 04/09/18
- * Time: 06.37
- * To change this template use File | Settings | File Templates.
- */
+import com.hendisantika.onlinebanking.model.PrimaryAccount;
+import com.hendisantika.onlinebanking.model.Recipient;
+import com.hendisantika.onlinebanking.model.SavingsAccount;
+import com.hendisantika.onlinebanking.model.User;
+import com.hendisantika.onlinebanking.service.TransactionService;
+import com.hendisantika.onlinebanking.service.UserService;
+
 @Controller
 @RequestMapping("/transfer")
 public class TransferController {
@@ -52,8 +43,7 @@ public class TransferController {
             @ModelAttribute("transferFrom") String transferFrom,
             @ModelAttribute("transferTo") String transferTo,
             @ModelAttribute("amount") String amount,
-            Principal principal
-    ) throws Exception {
+            Principal principal) throws Exception {
         User user = userService.findByUsername(principal.getName());
         PrimaryAccount primaryAccount = user.getPrimaryAccount();
         SavingsAccount savingsAccount = user.getSavingsAccount();
@@ -85,7 +75,8 @@ public class TransferController {
     }
 
     @RequestMapping(value = "/recipient/edit", method = RequestMethod.GET)
-    public String recipientEdit(@RequestParam(value = "recipientName") String recipientName, Model model, Principal principal) {
+    public String recipientEdit(@RequestParam(value = "recipientName") String recipientName, Model model,
+            Principal principal) {
 
         Recipient recipient = transactionService.findRecipientByName(recipientName);
         List<Recipient> recipientList = transactionService.findRecipientList(principal);
@@ -98,7 +89,8 @@ public class TransferController {
 
     @RequestMapping(value = "/recipient/delete", method = RequestMethod.GET)
     @Transactional
-    public String recipientDelete(@RequestParam(value = "recipientName") String recipientName, Model model, Principal principal) {
+    public String recipientDelete(@RequestParam(value = "recipientName") String recipientName, Model model,
+            Principal principal) {
 
         transactionService.deleteRecipientByName(recipientName);
 
@@ -107,7 +99,6 @@ public class TransferController {
         Recipient recipient = new Recipient();
         model.addAttribute("recipient", recipient);
         model.addAttribute("recipientList", recipientList);
-
 
         return "recipient";
     }
@@ -123,10 +114,13 @@ public class TransferController {
     }
 
     @RequestMapping(value = "/toSomeoneElse", method = RequestMethod.POST)
-    public String toSomeoneElsePost(@ModelAttribute("recipientName") String recipientName, @ModelAttribute("accountType") String accountType, @ModelAttribute("amount") String amount, Principal principal) {
+    public String toSomeoneElsePost(@ModelAttribute("recipientName") String recipientName,
+            @ModelAttribute("accountType") String accountType, @ModelAttribute("amount") String amount,
+            Principal principal) {
         User user = userService.findByUsername(principal.getName());
         Recipient recipient = transactionService.findRecipientByName(recipientName);
-        transactionService.toSomeoneElseTransfer(recipient, accountType, amount, user.getPrimaryAccount(), user.getSavingsAccount());
+        transactionService.toSomeoneElseTransfer(recipient, accountType, amount, user.getPrimaryAccount(),
+                user.getSavingsAccount());
 
         return "redirect:/userFront";
     }

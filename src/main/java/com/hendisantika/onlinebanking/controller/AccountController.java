@@ -1,10 +1,10 @@
 package com.hendisantika.onlinebanking.controller;
 
-import com.hendisantika.onlinebanking.entity.PrimaryAccount;
-import com.hendisantika.onlinebanking.entity.PrimaryTransaction;
-import com.hendisantika.onlinebanking.entity.SavingsAccount;
-import com.hendisantika.onlinebanking.entity.SavingsTransaction;
-import com.hendisantika.onlinebanking.entity.User;
+import com.hendisantika.onlinebanking.model.PrimaryAccount;
+import com.hendisantika.onlinebanking.model.PrimaryTransaction;
+import com.hendisantika.onlinebanking.model.SavingsAccount;
+import com.hendisantika.onlinebanking.model.SavingsTransaction;
+import com.hendisantika.onlinebanking.model.User;
 import com.hendisantika.onlinebanking.service.AccountService;
 import com.hendisantika.onlinebanking.service.TransactionService;
 import com.hendisantika.onlinebanking.service.UserService;
@@ -18,16 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.security.Principal;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 04/09/18
- * Time: 06.32
- * To change this template use File | Settings | File Templates.
- */
 @Controller
 @RequestMapping("/account")
 public class AccountController {
@@ -43,7 +33,8 @@ public class AccountController {
 
     @RequestMapping("/primaryAccount")
     public String primaryAccount(Model model, Principal principal) {
-        List<PrimaryTransaction> primaryTransactionList = transactionService.findPrimaryTransactionList(principal.getName());
+        List<PrimaryTransaction> primaryTransactionList = transactionService
+                .findPrimaryTransactionList(principal.getName());
 
         User user = userService.findByUsername(principal.getName());
         PrimaryAccount primaryAccount = user.getPrimaryAccount();
@@ -56,7 +47,8 @@ public class AccountController {
 
     @RequestMapping("/savingsAccount")
     public String savingsAccount(Model model, Principal principal) {
-        List<SavingsTransaction> savingsTransactionList = transactionService.findSavingsTransactionList(principal.getName());
+        List<SavingsTransaction> savingsTransactionList = transactionService
+                .findSavingsTransactionList(principal.getName());
         User user = userService.findByUsername(principal.getName());
         SavingsAccount savingsAccount = user.getSavingsAccount();
 
@@ -75,7 +67,8 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/deposit", method = RequestMethod.POST)
-    public String depositPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, Principal principal) {
+    public String depositPOST(@ModelAttribute("amount") String amount,
+            @ModelAttribute("accountType") String accountType, Principal principal) {
         accountService.deposit(accountType, Double.parseDouble(amount), principal);
 
         return "redirect:/userFront";
@@ -90,7 +83,8 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/withdraw", method = RequestMethod.POST)
-    public String withdrawPOST(@ModelAttribute("amount") String amount, @ModelAttribute("accountType") String accountType, Principal principal) {
+    public String withdrawPOST(@ModelAttribute("amount") String amount,
+            @ModelAttribute("accountType") String accountType, Principal principal) {
         accountService.withdraw(accountType, Double.parseDouble(amount), principal);
 
         return "redirect:/userFront";

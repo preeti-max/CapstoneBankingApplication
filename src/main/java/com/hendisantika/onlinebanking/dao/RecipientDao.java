@@ -1,6 +1,6 @@
-package com.hendisantika.onlinebanking.repository;
+package com.hendisantika.onlinebanking.dao;
 
-import com.hendisantika.onlinebanking.entity.User;
+import com.hendisantika.onlinebanking.model.Recipient;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -12,14 +12,14 @@ import java.util.List;
  * Email: hendisantika@gmail.com
  * Telegram : @hendisantika34
  * Date: 08/08/18
- * Time: 06.08
+ * Time: 06.06
  * To change this template use File | Settings | File Templates.
  */
-public interface UserDao extends CrudRepository<User, Long> {
+public interface RecipientDao extends CrudRepository<Recipient, Long> {
 
-    User findByUsername(String username);
+    List<Recipient> findAll();
 
-    User findByEmail(String email);
+    Recipient findByName(String recipientName);
 
-    List<User> findAll();
+    void deleteByName(String recipientName);
 }

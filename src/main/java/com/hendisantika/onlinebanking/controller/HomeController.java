@@ -1,11 +1,5 @@
 package com.hendisantika.onlinebanking.controller;
 
-import com.hendisantika.onlinebanking.entity.PrimaryAccount;
-import com.hendisantika.onlinebanking.entity.SavingsAccount;
-import com.hendisantika.onlinebanking.entity.User;
-import com.hendisantika.onlinebanking.repository.RoleDao;
-import com.hendisantika.onlinebanking.security.UserRole;
-import com.hendisantika.onlinebanking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +12,13 @@ import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 04/09/18
- * Time: 06.34
- * To change this template use File | Settings | File Templates.
- */
+import com.hendisantika.onlinebanking.dao.RoleDao;
+import com.hendisantika.onlinebanking.model.PrimaryAccount;
+import com.hendisantika.onlinebanking.model.SavingsAccount;
+import com.hendisantika.onlinebanking.model.User;
+import com.hendisantika.onlinebanking.security.UserRole;
+import com.hendisantika.onlinebanking.service.UserService;
+
 @Controller
 public class HomeController {
 

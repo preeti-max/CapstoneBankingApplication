@@ -1,9 +1,7 @@
-package com.hendisantika.onlinebanking.repository;
+package com.hendisantika.onlinebanking.dao;
 
-import com.hendisantika.onlinebanking.entity.SavingsTransaction;
+import com.hendisantika.onlinebanking.model.PrimaryAccount;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,10 +10,10 @@ import java.util.List;
  * Email: hendisantika@gmail.com
  * Telegram : @hendisantika34
  * Date: 08/08/18
- * Time: 06.08
+ * Time: 06.04
  * To change this template use File | Settings | File Templates.
  */
-public interface SavingsTransactionDao extends CrudRepository<SavingsTransaction, Long> {
+public interface PrimaryAccountDao extends CrudRepository<PrimaryAccount, Long> {
 
-    List<SavingsTransaction> findAll();
+    PrimaryAccount findByAccountNumber(int accountNumber);
 }

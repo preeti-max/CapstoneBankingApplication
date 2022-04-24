@@ -1,4 +1,4 @@
-package com.hendisantika.onlinebanking.entity;
+package com.hendisantika.onlinebanking.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -12,16 +12,6 @@ import javax.persistence.OneToMany;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * Project : online-banking
- * User: hendisantika
- * Email: hendisantika@gmail.com
- * Telegram : @hendisantika34
- * Date: 07/08/18
- * Time: 06.51
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 public class SavingsAccount {
 
@@ -66,6 +56,5 @@ public class SavingsAccount {
     public void setSavingsTransactionList(List<SavingsTransaction> savingsTransactionList) {
         this.savingsTransactionList = savingsTransactionList;
     }
-
 
 }
