@@ -11,29 +11,31 @@ import java.util.List;
 
 public interface TransactionService {
 
-    List<PrimaryTransaction> findPrimaryTransactionList(String username);
+        List<PrimaryTransaction> findPrimaryTransactionList(String username);
 
-    List<SavingsTransaction> findSavingsTransactionList(String username);
+        List<SavingsTransaction> findSavingsTransactionList(String username);
 
-    void savePrimaryDepositTransaction(PrimaryTransaction primaryTransaction);
+        void savePrimaryDepositTransaction(PrimaryTransaction primaryTransaction);
 
-    void saveSavingsDepositTransaction(SavingsTransaction savingsTransaction);
+        void saveSavingsDepositTransaction(SavingsTransaction savingsTransaction);
 
-    void savePrimaryWithdrawTransaction(PrimaryTransaction primaryTransaction);
+        void savePrimaryWithdrawTransaction(PrimaryTransaction primaryTransaction);
 
-    void saveSavingsWithdrawTransaction(SavingsTransaction savingsTransaction);
+        void saveSavingsWithdrawTransaction(SavingsTransaction savingsTransaction);
 
-    void betweenAccountsTransfer(String transferFrom, String transferTo, String amount, PrimaryAccount primaryAccount,
-            SavingsAccount savingsAccount) throws Exception;
+        void betweenAccountsTransfer(String transferFrom, String transferTo, String amount,
+                        PrimaryAccount primaryAccount,
+                        SavingsAccount savingsAccount) throws Exception;
 
-    List<Recipient> findRecipientList(Principal principal);
+        List<Recipient> findRecipientList(Principal principal);
 
-    Recipient saveRecipient(Recipient recipient);
+        Recipient saveRecipient(Recipient recipient);
 
-    Recipient findRecipientByName(String recipientName);
+        Recipient findRecipientByName(String recipientName);
 
-    void deleteRecipientByName(String recipientName);
+        void deleteRecipientByName(String recipientName);
 
-    void toSomeoneElseTransfer(Recipient recipient, String accountType, String amount, PrimaryAccount primaryAccount,
-            SavingsAccount savingsAccount);
+        void toSomeoneElseTransfer(Recipient recipient, String accountType, String amount,
+                        PrimaryAccount primaryAccount,
+                        SavingsAccount savingsAccount);
 }
