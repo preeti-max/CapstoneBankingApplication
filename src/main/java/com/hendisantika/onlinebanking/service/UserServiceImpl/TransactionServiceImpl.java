@@ -76,6 +76,13 @@ public class TransactionServiceImpl implements TransactionService {
     public void betweenAccountsTransfer(String transferFrom, String transferTo, String amount,
             PrimaryAccount primaryAccount, SavingsAccount savingsAccount) throws Exception {
         if (transferFrom.equalsIgnoreCase("Primary") && transferTo.equalsIgnoreCase("Savings")) {
+
+            BigDecimal amount1 = new BigDecimal(amount);
+            if (primaryAccount.getAccountBalance().compareTo(amount1) < 0) {
+                return;
+
+            }
+
             primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
             savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().add(new BigDecimal(amount)));
             primaryAccountDao.save(primaryAccount);
@@ -88,6 +95,11 @@ public class TransactionServiceImpl implements TransactionService {
                     Double.parseDouble(amount), primaryAccount.getAccountBalance(), primaryAccount);
             primaryTransactionDao.save(primaryTransaction);
         } else if (transferFrom.equalsIgnoreCase("Savings") && transferTo.equalsIgnoreCase("Primary")) {
+            BigDecimal amount1 = new BigDecimal(amount);
+            if (savingsAccount.getAccountBalance().compareTo(amount1) < 0) {
+                return;
+
+            }
             primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().add(new BigDecimal(amount)));
             savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().subtract(new BigDecimal(amount)));
             primaryAccountDao.save(primaryAccount);
@@ -128,6 +140,11 @@ public class TransactionServiceImpl implements TransactionService {
     public void toSomeoneElseTransfer(Recipient recipient, String accountType, String amount,
             PrimaryAccount primaryAccount, SavingsAccount savingsAccount) {
         if (accountType.equalsIgnoreCase("Primary")) {
+            BigDecimal amount1 = new BigDecimal(amount);
+            if (primaryAccount.getAccountBalance().compareTo(amount1) < 0) {
+                return;
+
+            }
             primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
             primaryAccountDao.save(primaryAccount);
 
@@ -138,6 +155,11 @@ public class TransactionServiceImpl implements TransactionService {
                     primaryAccount.getAccountBalance(), primaryAccount);
             primaryTransactionDao.save(primaryTransaction);
         } else if (accountType.equalsIgnoreCase("Savings")) {
+            BigDecimal amount1 = new BigDecimal(amount);
+            if (savingsAccount.getAccountBalance().compareTo(amount1) < 0) {
+                return;
+
+            }
             savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().subtract(new BigDecimal(amount)));
             savingsAccountDao.save(savingsAccount);
 

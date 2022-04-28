@@ -85,6 +85,11 @@ public class AccountServiceImpl implements AccountService {
 
         if (accountType.equalsIgnoreCase("Primary")) {
             PrimaryAccount primaryAccount = user.getPrimaryAccount();
+            BigDecimal amount1 = new BigDecimal(amount);
+            if (primaryAccount.getAccountBalance().compareTo(amount1) < 0) {
+                return;
+
+            }
             primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
             primaryAccountDao.save(primaryAccount);
 
@@ -95,6 +100,11 @@ public class AccountServiceImpl implements AccountService {
             transactionService.savePrimaryWithdrawTransaction(primaryTransaction);
         } else if (accountType.equalsIgnoreCase("Savings")) {
             SavingsAccount savingsAccount = user.getSavingsAccount();
+            BigDecimal amount1 = new BigDecimal(amount);
+            if (savingsAccount.getAccountBalance().compareTo(amount1) < 0) {
+                return;
+
+            }
             savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().subtract(new BigDecimal(amount)));
             savingsAccountDao.save(savingsAccount);
 
